@@ -7,16 +7,26 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
         format_sql: true
 
-  security:
-    user:
-      name: user
-      password: 1234
+#  security:
+#    user:
+#      name: user
+#      password: 1234
 
-logging.level:
-  org.hibernate.SQL: debug
+#  devtools:
+#    livereload:
+#      enabled: true
+#    restart:
+#      enabled: true
+
+#  thymeleaf:
+#    cache: false
+
+#logging.level:
+#  org.apache.coyote.http11: debug
+#  org.hibernate.SQL: debug

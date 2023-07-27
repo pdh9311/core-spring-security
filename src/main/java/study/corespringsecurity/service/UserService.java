@@ -1,8 +1,8 @@
 package study.corespringsecurity.service;
 
-import study.corespringsecurity.domain.Member;
+import study.corespringsecurity.domain.Account;
 
-public interface MemberService {
+public interface UserService {
 
-    void createUser(Member member);
+    void createUser(Account account);
 }

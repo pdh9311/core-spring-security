@@ -3,19 +3,16 @@ package study.corespringsecurity.security.provider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InsufficientAuthenticationException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import study.corespringsecurity.security.common.FormWebAuthenticationDetails;
 import study.corespringsecurity.security.service.AccountContext;
-
+import study.corespringsecurity.security.token.AjaxAuthenticationToken;
 @Component
 @RequiredArgsConstructor
-public class FormAuthenticationProvider implements AuthenticationProvider {
+public class AjaxAuthenticationProvider implements AuthenticationProvider {
 
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
@@ -29,17 +26,11 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
             throw new BadCredentialsException("BadCredentialsException");
         }
 
-        FormWebAuthenticationDetails details = (FormWebAuthenticationDetails) authentication.getDetails();
-        String secretKey = details.getSecretKey();
-        if (!"secret".equals(secretKey)) {
-            throw new InsufficientAuthenticationException("InsufficientAuthenticationException");
-        }
-
-        return new UsernamePasswordAuthenticationToken(accountContext.getAccount(), null, accountContext.getAuthorities());
+        return new AjaxAuthenticationToken(accountContext.getAccount(), null, accountContext.getAuthorities());
     }
 
     @Override
     public boolean supports(Class<?> authentication) {
-        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
+        return AjaxAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

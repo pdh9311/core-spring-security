@@ -3,7 +3,7 @@ package study.corespringsecurity.domain;
 import lombok.Data;
 
 @Data
-public class MemberDto {
+public class AccountDto {
     private String username;
     private String password;
     private String email;
