@@ -30,13 +30,13 @@ public class AjaxSecurityConfig {
     public SecurityFilterChain ajaxSecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authz -> authz
+                        .mvcMatchers("/", "/api/login").permitAll()
                         .mvcMatchers("/api/messages").hasRole("MANAGER")
                         .mvcMatchers("/api/message").hasRole("USER")
-                        .mvcMatchers("/api/**").permitAll()
                         .anyRequest().authenticated()
                 )
 //                .addFilterBefore(ajaxLoginProcessingFilter(), UsernamePasswordAuthenticationFilter.class)
-                .csrf((csrf) -> csrf.disable())
+//                .csrf((csrf) -> csrf.disable())
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(new AjaxLoginAuthenticationEntryPoint())
                         .accessDeniedHandler(ajaxAccessDeniedHandler())

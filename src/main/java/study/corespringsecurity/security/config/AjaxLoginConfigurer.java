@@ -19,6 +19,10 @@ public class AjaxLoginConfigurer<H extends HttpSecurityBuilder<H>> extends
     private AuthenticationFailureHandler failureHandler;
     private AuthenticationManager authenticationManager;
 
+    public AjaxLoginConfigurer() {
+        super(new AjaxLoginProcessingFilter(), null);
+    }
+
     @Override
     public void init(H http) throws Exception {
         super.init(http);
